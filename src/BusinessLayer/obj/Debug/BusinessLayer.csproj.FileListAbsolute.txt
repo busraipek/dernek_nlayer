@@ -1,0 +1,8 @@
+C:\Users\90505\source\repos\BusinessLayer\bin\Debug\BusinessLayer.dll
+C:\Users\90505\source\repos\BusinessLayer\bin\Debug\BusinessLayer.pdb
+C:\Users\90505\source\repos\BusinessLayer\bin\Debug\DataAccessLayer.dll
+C:\Users\90505\source\repos\BusinessLayer\bin\Debug\DataAccessLayer.pdb
+C:\Users\90505\source\repos\BusinessLayer\obj\Debug\BusinessLayer.csproj.AssemblyReference.cache
+C:\Users\90505\source\repos\BusinessLayer\obj\Debug\BusinessLayer.csproj.CoreCompileInputs.cache
+C:\Users\90505\source\repos\BusinessLayer\obj\Debug\BusinessLayer.dll
+C:\Users\90505\source\repos\BusinessLayer\obj\Debug\BusinessLayer.pdb
