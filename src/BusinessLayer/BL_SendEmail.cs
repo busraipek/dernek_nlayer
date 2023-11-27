@@ -29,7 +29,7 @@ namespace BusinessLayer
                 smtp.EnableSsl = true;
                 sender.baslik = baslik;
                 sender.konu = konu;
-                MailMessage message = new MailMessage(sender.senderEmail, "busra.ipek.kmk@gmail.com", baslik, konu);
+                MailMessage message = new MailMessage(sender.senderEmail, "aysegulkubraipek@gmail.com", baslik, konu);
                 smtp.Send(message);
             }
         }

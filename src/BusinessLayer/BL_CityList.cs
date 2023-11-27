@@ -10,16 +10,14 @@ namespace BusinessLayer
 {
     public class BL_CityList
     {
-
         public List<City> GetCities()
         {
             List<City> cities = new List<City>();
-            OleDbConnection connection = new OleDbConnection("Provider=Microsoft.ACE.Oledb.12.0;Data Source=C:\\Users\\90505\\Desktop\\dernek_db.accdb");
-            OleDbCommand komut = new OleDbCommand("SELECT * FROM sehir", connection);
+            OleDbConnection connection = new OleDbConnection("Provider=Microsoft.ACE.Oledb.12.0;Data Source=C:\\Users\\90505\\Desktop\\Database4.accdb");
             {
                 connection.Open();
 
-                string query = "SELECT sehir, plaka FROM sehir";
+                string query = "SELECT sehir FROM sehir";
 
                 using (OleDbCommand command = new OleDbCommand(query, connection))
                 {
@@ -30,7 +28,6 @@ namespace BusinessLayer
                             City city = new City()
                             {
                                 sehir = reader["sehir"].ToString(),
-                                plaka = Convert.ToInt32(reader["plaka"])
                             };
 
                             cities.Add(city);
