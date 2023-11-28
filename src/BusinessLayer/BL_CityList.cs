@@ -10,15 +10,13 @@ namespace BusinessLayer
 {
     public class BL_CityList
     {
-        public List<City> GetCities()
+        public void GetCities(List<string> cities)
         {
-            List<City> cities = new List<City>();
             OleDbConnection connection = new OleDbConnection("Provider=Microsoft.ACE.Oledb.12.0;Data Source=C:\\Users\\90505\\Desktop\\Database4.accdb");
             {
                 connection.Open();
 
                 string query = "SELECT sehir FROM sehir";
-
                 using (OleDbCommand command = new OleDbCommand(query, connection))
                 {
                     using (OleDbDataReader reader = command.ExecuteReader())
@@ -30,12 +28,11 @@ namespace BusinessLayer
                                 sehir = reader["sehir"].ToString(),
                             };
 
-                            cities.Add(city);
+                            cities.Add(city.sehir.ToString()) ;
                         }
                     }
                 }
             }
-            return cities;
         }
     }
 }

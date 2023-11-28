@@ -11,50 +11,58 @@ namespace BusinessLayer
 {
     public class BL_MemberList
     {
-        public List<Member> GetMember()
+        public void RefreshMemberList()
         {
-            List<Member> members = new List<Member>();
+            
+        }
+        public void GetMember(string[,] membersArray)
+        {
             OleDbConnection connection = new OleDbConnection("Provider=Microsoft.ACE.Oledb.12.0;Data Source=C:\\Users\\90505\\Desktop\\Database4.accdb");
-            { 
-            try
             {
-                connection.Open();
-                    //Emp oemp = new Emp(1234, "Devesh Omar", "GZB");
-                    //lEmp.Add(oemp);
-                    //oemp = new Emp(1234, "ROLI", "GZB");
-                    //lEmp.Add(oemp);
-
-                    string query = "SELECT ad, soyad, cinsiyet, dogum_tarihi, kimlik_no, kan_grubu, uyelik_durumu, e_posta, sehir FROM uye";
-
-                using (OleDbCommand komut = new OleDbCommand(query, connection))
+                try
                 {
-                    using (OleDbDataReader reader = komut.ExecuteReader())
+                    connection.Open();
+                    string query = "SELECT ad, soyad, cinsiyet, dogum_tarihi, kimlik_no, kan_grubu, uyelik_durumu, e_posta, sehir FROM uye";
+                    using (OleDbCommand komut = new OleDbCommand(query, connection))
                     {
-                        while (reader.HasRows)
+                        using (OleDbDataReader reader = komut.ExecuteReader())
                         {
-                            Member member = new Member()
+                            int i = 0;
+                            while (reader.Read())
                             {
-                                ad = reader["ad"].ToString(),
-                                soyad = reader["soyad"].ToString(),
-                                kimlik_no = reader["kimlik_no"].ToString(),
-                                cinsiyet = reader["cinsiyet"].ToString(),
-                                dogum_tarihi = (DateTime)reader["dogum_tarihi"],
-                                kan_grubu = reader["kan_grubu"].ToString(),
-                                uye_durumu = reader["uye_durumu"].ToString(),
-                                e_posta = reader["e_posta"].ToString(),
-                                sehir = reader["sehir"].ToString(),
-                            };
-                            members.Add(member);
+                                Member member = new Member()
+                                {
+                                    ad = reader["ad"].ToString(),
+                                    soyad = reader["soyad"].ToString(),
+                                    cinsiyet = reader["cinsiyet"].ToString(),
+                                    dogum_tarihi = (DateTime)reader["dogum_tarihi"],
+                                    kimlik_no = reader["kimlik_no"].ToString(),
+                                    kan_grubu = reader["kan_grubu"].ToString(),
+                                    uyelik_durumu = reader["uyelik_durumu"].ToString(),
+                                    e_posta = reader["e_posta"].ToString(),
+                                    sehir = reader["sehir"].ToString(),
+                                };
+                                membersArray[i, 0] = member.ad;
+                                membersArray[i, 1] = member.soyad;
+                                membersArray[i, 2] = member.cinsiyet;
+                                membersArray[i, 3] = member.dogum_tarihi.ToString(); // DateTime'i string'e dönüştür
+                                membersArray[i, 4] = member.kimlik_no;
+                                membersArray[i, 5] = member.kan_grubu;
+                                membersArray[i, 6] = member.uyelik_durumu;
+                                membersArray[i, 7] = member.e_posta;
+                                membersArray[i, 8] = member.sehir;
+                                i = i + 1;
+                            }
+                            reader.Close();
                         }
                     }
                 }
+                catch
+                {
 
-            }               
-            catch
-            {
-
+                }
             }
-            return members;
         }
     }
-}}
+}
+

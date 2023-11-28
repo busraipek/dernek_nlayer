@@ -10,12 +10,17 @@ namespace BusinessLayer
 {
     public class BL_AddMember
     {
-        private DataAccessLayer.Member member;
-        public BL_AddMember()
+        public int boole = 0;
+        public bool BL_FillBar()
         {
-            member = new DataAccessLayer.Member();
+            if (boole == 0)
+            {
+                return false;
+            }
+            else
+                return true;
         }
-        public void AddMember(string ad,string soyad,string cins, DateTime dt, string kn, string kg,string uye, string ep,string sehir)
+        public void AddMember(string ad,string soyad,string cins, string kn,DateTime dt,  string kg,string uye, string ep,string sehir)
         {
 
             OleDbConnection connection = new OleDbConnection("Provider=Microsoft.ACE.Oledb.12.0;Data Source=C:\\Users\\90505\\Desktop\\Database4.accdb");               
@@ -24,27 +29,29 @@ namespace BusinessLayer
             try
             {
                 OleDbCommand komut = new OleDbCommand("insert into uye" +
-                "(ad,soyad,cinsiyet,dogum_tarihi,kimlik_no,kan_grubu," +
-                "uyelik_durumu,e_posta,sehir) values (@ad, @soyad, @cinsiyet, @dogum_tarihi, @kimlik_no, @kan_grubu, " +
+                "(ad,soyad,cinsiyet,kimlik_no,dogum_tarihi,kan_grubu," +
+                "uyelik_durumu,e_posta,sehir) values (@ad, @soyad, @cinsiyet, @kimlik_no, @dogum_tarihi, @kan_grubu, " +
                 "@uyelik_durumu,@e_posta,@sehir)", connection);
 
                 komut.Parameters.AddWithValue("@ad", ad);
                 komut.Parameters.AddWithValue("@soyad", soyad);
                 komut.Parameters.AddWithValue("@cinsiyet", cins);
-                komut.Parameters.AddWithValue("@dogum_tarihi", dt);
                 komut.Parameters.AddWithValue("@kimlik_no", kn);
+                komut.Parameters.AddWithValue("@dogum_tarihi", dt);
                 komut.Parameters.AddWithValue("@kan_grubu", kg);
                 komut.Parameters.AddWithValue("@uyelik_durumu", uye);
                 komut.Parameters.AddWithValue("@e_posta", ep);
                 komut.Parameters.AddWithValue("@sehir", sehir);
                 komut.ExecuteNonQuery();
-            //Veritabanında değişiklik yapacak komut işlemi bu satırda gerçekleşiyor.
+                boole = 1;
+                BL_FillBar();
             }
             catch (Exception)
-            {     
-          }
+            {
+            
+            }
              connection.Close();
-
         }
+
     }
 }
