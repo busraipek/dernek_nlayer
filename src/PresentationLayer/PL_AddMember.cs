@@ -14,10 +14,12 @@ namespace PresentationLayer
     public partial class PL_AddMember : Form
     {
         private BusinessLayer.BL_CityList pl_citylist;
-        
+        private BusinessLayer.BL_AddMember pl_addmember;
+
         public PL_AddMember()
         {
             pl_citylist = new BL_CityList();
+            pl_addmember = new BL_AddMember();
             InitializeComponent();
         }
         private void PL_AddMember_Load(object sender, EventArgs e)
@@ -56,11 +58,9 @@ namespace PresentationLayer
             }
             try
             {
-                foreach (var sehir in pl_citylist.GetCities())
-                {
-                    cb_sehir.Items.Add(sehir.sehir);
-                }
-                cb_sehir.Text = cb_sehir.Items[0].ToString();
+                List<string> cities = new List<string>();
+                pl_citylist.GetCities(cities);
+                cb_sehir.DataSource = cities;
             }
             catch
             {
@@ -77,11 +77,65 @@ namespace PresentationLayer
             e.Handled = !char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar)
             && !char.IsSeparator(e.KeyChar);
 
+
         }
         private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text != string.Empty && textBox2.Text != string.Empty && textBox5.Text != string.Empty && textBox4.Text != string.Empty)
+            {
+                    string ad = textBox1.Text;
+                    string soyad = textBox2.Text;
+                    string cinsiyet = cb_cinsiyet.Text;
+                    string kimlik =textBox5.Text;
+                    DateTime dogum = dateTimePicker1.Value;
+                    string kan_grubu= cb_kangrubu.Text;
+                    string uyelik= cb_uyelikdurumu.Text;
+                    string e_posta = textBox4.Text;
+                    string sehir = cb_sehir.Text;
+                try
+                {
+                    pl_addmember.AddMember(ad, soyad, cinsiyet, kimlik,dogum, kan_grubu, uyelik, e_posta, sehir);
+                    if (pl_addmember.BL_FillBar()==true)
+                    {
+                        while (progressBar1.Value < 100)
+                        {
+                        
+                        progressBar1.Value = +progressBar1.Value + 100;
+
+                        }
+                        if (progressBar1.Value == 100)
+                        {
+                            MessageBox.Show("Üye kaydedildi.");
+                        }
+                    }
+
+                }
+                catch
+                {
+                    MessageBox.Show("Üye kaydedilemedi, tekrar deneyin");
+                }
+            }
+            else
+                MessageBox.Show("Tüm bilgilerin doldurulması zorunludur.");
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            textBox1.Text = textBox1.Text.ToUpper();
+            textBox1.SelectionStart = textBox1.Text.Length;
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            textBox2.Text = textBox2.Text.ToUpper();
+            textBox2.SelectionStart = textBox2.Text.Length;
         }
     }
 }

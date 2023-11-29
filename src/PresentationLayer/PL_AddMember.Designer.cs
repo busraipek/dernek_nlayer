@@ -48,6 +48,9 @@ namespace PresentationLayer
             this.label9 = new System.Windows.Forms.Label();
             this.cb_kangrubu = new System.Windows.Forms.ComboBox();
             this.cb_cinsiyet = new System.Windows.Forms.ComboBox();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // cb_sehir
@@ -55,24 +58,26 @@ namespace PresentationLayer
             this.cb_sehir.FormattingEnabled = true;
             this.cb_sehir.Location = new System.Drawing.Point(421, 59);
             this.cb_sehir.Name = "cb_sehir";
-            this.cb_sehir.Size = new System.Drawing.Size(121, 24);
-            this.cb_sehir.TabIndex = 0;
+            this.cb_sehir.Size = new System.Drawing.Size(200, 24);
+            this.cb_sehir.TabIndex = 6;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(236, 368);
+            this.button1.Location = new System.Drawing.Point(238, 347);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(145, 54);
-            this.button1.TabIndex = 1;
+            this.button1.Size = new System.Drawing.Size(147, 54);
+            this.button1.TabIndex = 11;
             this.button1.Text = "Kaydet";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(137, 42);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 22);
-            this.textBox1.TabIndex = 2;
+            this.textBox1.Size = new System.Drawing.Size(121, 22);
+            this.textBox1.TabIndex = 1;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress_1);
             // 
             // label1
@@ -106,23 +111,24 @@ namespace PresentationLayer
             // 
             this.textBox2.Location = new System.Drawing.Point(137, 95);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 22);
-            this.textBox2.TabIndex = 6;
+            this.textBox2.Size = new System.Drawing.Size(121, 22);
+            this.textBox2.TabIndex = 2;
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress_1);
             // 
             // textBox4
             // 
             this.textBox4.Location = new System.Drawing.Point(137, 294);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 22);
-            this.textBox4.TabIndex = 8;
+            this.textBox4.Size = new System.Drawing.Size(121, 22);
+            this.textBox4.TabIndex = 5;
             // 
             // textBox5
             // 
             this.textBox5.Location = new System.Drawing.Point(137, 223);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 22);
-            this.textBox5.TabIndex = 9;
+            this.textBox5.Size = new System.Drawing.Size(121, 22);
+            this.textBox5.TabIndex = 4;
             this.textBox5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox5_KeyPress);
             // 
             // cb_uyelikdurumu
@@ -130,8 +136,8 @@ namespace PresentationLayer
             this.cb_uyelikdurumu.FormattingEnabled = true;
             this.cb_uyelikdurumu.Location = new System.Drawing.Point(421, 171);
             this.cb_uyelikdurumu.Name = "cb_uyelikdurumu";
-            this.cb_uyelikdurumu.Size = new System.Drawing.Size(121, 24);
-            this.cb_uyelikdurumu.TabIndex = 10;
+            this.cb_uyelikdurumu.Size = new System.Drawing.Size(200, 24);
+            this.cb_uyelikdurumu.TabIndex = 9;
             // 
             // label4
             // 
@@ -183,7 +189,7 @@ namespace PresentationLayer
             this.dateTimePicker1.Location = new System.Drawing.Point(421, 119);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 22);
-            this.dateTimePicker1.TabIndex = 19;
+            this.dateTimePicker1.TabIndex = 7;
             this.dateTimePicker1.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             // 
             // label9
@@ -200,8 +206,8 @@ namespace PresentationLayer
             this.cb_kangrubu.FormattingEnabled = true;
             this.cb_kangrubu.Location = new System.Drawing.Point(421, 221);
             this.cb_kangrubu.Name = "cb_kangrubu";
-            this.cb_kangrubu.Size = new System.Drawing.Size(121, 24);
-            this.cb_kangrubu.TabIndex = 21;
+            this.cb_kangrubu.Size = new System.Drawing.Size(200, 24);
+            this.cb_kangrubu.TabIndex = 10;
             // 
             // cb_cinsiyet
             // 
@@ -209,13 +215,31 @@ namespace PresentationLayer
             this.cb_cinsiyet.Location = new System.Drawing.Point(137, 163);
             this.cb_cinsiyet.Name = "cb_cinsiyet";
             this.cb_cinsiyet.Size = new System.Drawing.Size(121, 24);
-            this.cb_cinsiyet.TabIndex = 22;
+            this.cb_cinsiyet.TabIndex = 3;
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(238, 397);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(147, 10);
+            this.progressBar1.Step = 25;
+            this.progressBar1.TabIndex = 21;
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.Location = new System.Drawing.Point(733, 291);
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(8, 56);
+            this.trackBar1.TabIndex = 22;
             // 
             // PL_AddMember
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(650, 450);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.trackBar1);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.cb_cinsiyet);
             this.Controls.Add(this.cb_kangrubu);
             this.Controls.Add(this.label9);
@@ -233,11 +257,11 @@ namespace PresentationLayer
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.cb_sehir);
             this.Name = "PL_AddMember";
             this.Text = "PL_AddMember";
             this.Load += new System.EventHandler(this.PL_AddMember_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -264,5 +288,7 @@ namespace PresentationLayer
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox cb_kangrubu;
         private System.Windows.Forms.ComboBox cb_cinsiyet;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.TrackBar trackBar1;
     }
 }
