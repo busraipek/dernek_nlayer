@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="BL_AddMember.cs" />
     <Compile Include="BL_CityList.cs" />
+    <Compile Include="BL_DueList.cs" />
     <Compile Include="BL_FilterMember.cs" />
     <Compile Include="BL_MemberList.cs" />
     <Compile Include="BL_SendEmail.cs" />

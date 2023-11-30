@@ -18,7 +18,7 @@ namespace BusinessLayer
                 try
                 {
                     connection.Open();
-                    string query = "SELECT ad, soyad, cinsiyet, dogum_tarihi, kimlik_no, kan_grubu, uyelik_durumu, e_posta, sehir FROM uye";
+                    string query = "SELECT u.ad, u.soyad, u.e_posta, a.tarih, a.ucret, ad.durum FROM aidat AS a INNER JOIN aidat_durum AS ad ON a.id = ad.aidat_id INNER JOIN uye AS u ON ad.kimlik_no = u.kimlik_no";
                     using (OleDbCommand komut = new OleDbCommand(query, connection))
                     {
                         using (OleDbDataReader reader = komut.ExecuteReader())
@@ -26,27 +26,21 @@ namespace BusinessLayer
                             int i = 0;
                             while (reader.Read())
                             {
-                                Member member = new Member()
+                                DuesStatus member = new DuesStatus()
                                 {
                                     ad = reader["ad"].ToString(),
                                     soyad = reader["soyad"].ToString(),
-                                    cinsiyet = reader["cinsiyet"].ToString(),
-                                    dogum_tarihi = (DateTime)reader["dogum_tarihi"],
-                                    kimlik_no = reader["kimlik_no"].ToString(),
-                                    kan_grubu = reader["kan_grubu"].ToString(),
-                                    uyelik_durumu = reader["uyelik_durumu"].ToString(),
                                     e_posta = reader["e_posta"].ToString(),
-                                    sehir = reader["sehir"].ToString(),
+                                    tarih = (DateTime)reader["tarih"],
+                                    ucret = (int)reader["ucret"],
+                                    durum = reader["durum"].ToString(),
                                 };
                                 membersArray[i, 0] = member.ad;
                                 membersArray[i, 1] = member.soyad;
-                                membersArray[i, 2] = member.cinsiyet;
-                                membersArray[i, 3] = member.dogum_tarihi.ToString(); // DateTime'i string'e dönüştür
-                                membersArray[i, 4] = member.kimlik_no;
-                                membersArray[i, 5] = member.kan_grubu;
-                                membersArray[i, 6] = member.uyelik_durumu;
-                                membersArray[i, 7] = member.e_posta;
-                                membersArray[i, 8] = member.sehir;
+                                membersArray[i, 2] = member.tarih.ToString("dd/MM/yyyy"); // DateTime'i string'e dönüştür
+                                membersArray[i, 3] = member.durum;
+                                membersArray[i, 4] = member.ucret.ToString() ;
+                                membersArray[i, 5] = member.e_posta;
                                 i = i + 1;
                             }
                             reader.Close();
