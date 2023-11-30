@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
-    public class City
+    public class Due
     {
-        public string sehir { get; set; }
+        public int aidat_id { get; set; }
+        public DateTime tarih { get; set; }
+        public int ucret { get; set; }
+
     }
 }
