@@ -30,16 +30,17 @@ namespace PresentationLayer
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.Ücret = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Tarih = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Ücret = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tarih = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -57,44 +58,25 @@ namespace PresentationLayer
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Güncel Aidat";
             // 
-            // listView1
+            // button1
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Ücret,
-            this.Tarih});
-            this.listView1.FullRowSelect = true;
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(28, 22);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(207, 308);
-            this.listView1.TabIndex = 1;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.button1.Location = new System.Drawing.Point(18, 258);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(141, 35);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Güncelle";
+            this.button1.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // checkBox1
             // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(18, 133);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(141, 22);
-            this.textBox1.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 43);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(123, 17);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Son Ödeme Tarihi";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 113);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(42, 17);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Ücret";
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(21, 170);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(141, 21);
+            this.checkBox1.TabIndex = 4;
+            this.checkBox1.Text = "Aidat Güncelleme";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // dateTimePicker1
             // 
@@ -109,38 +91,80 @@ namespace PresentationLayer
             this.dateTimePicker1.TabIndex = 3;
             this.dateTimePicker1.Value = new System.DateTime(2023, 11, 30, 0, 32, 37, 0);
             // 
-            // checkBox1
+            // label2
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(21, 170);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(141, 21);
-            this.checkBox1.TabIndex = 4;
-            this.checkBox1.Text = "Aidat Güncelleme";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(18, 113);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(42, 17);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Ücret";
             // 
-            // button1
+            // label1
             // 
-            this.button1.Location = new System.Drawing.Point(18, 258);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(141, 35);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Güncelle";
-            this.button1.UseVisualStyleBackColor = true;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(18, 43);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(123, 17);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Son Ödeme Tarihi";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(18, 133);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(141, 22);
+            this.textBox1.TabIndex = 0;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.ColumnHeadersHeight = 29;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Ücret,
+            this.Tarih});
+            this.dataGridView1.Location = new System.Drawing.Point(12, 22);
+            this.dataGridView1.MultiSelect = false;
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(233, 308);
+            this.dataGridView1.TabIndex = 6;
+            // 
+            // Ücret
+            // 
+            this.Ücret.FillWeight = 70F;
+            this.Ücret.HeaderText = "Ücret";
+            this.Ücret.MinimumWidth = 6;
+            this.Ücret.Name = "Ücret";
+            this.Ücret.ReadOnly = true;
+            this.Ücret.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Tarih
+            // 
+            this.Tarih.HeaderText = "Tarih";
+            this.Tarih.MinimumWidth = 6;
+            this.Tarih.Name = "Tarih";
+            this.Tarih.ReadOnly = true;
+            this.Tarih.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // PL_CurrentDue
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(459, 354);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox1);
             this.Name = "PL_CurrentDue";
             this.Text = "PL_CurrentDue";
             this.Load += new System.EventHandler(this.PL_CurrentDue_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -153,9 +177,9 @@ namespace PresentationLayer
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ColumnHeader Ücret;
-        private System.Windows.Forms.ColumnHeader Tarih;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ücret;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Tarih;
     }
 }

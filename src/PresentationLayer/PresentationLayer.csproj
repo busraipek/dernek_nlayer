@@ -75,6 +75,9 @@
     <EmbeddedResource Include="PL_CurrentDue.resx">
       <DependentUpon>PL_CurrentDue.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PL_DuesStatusOfMembers.resx">
+      <DependentUpon>PL_DuesStatusOfMembers.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PL_HomePage.resx">
       <DependentUpon>PL_HomePage.cs</DependentUpon>
     </EmbeddedResource>
