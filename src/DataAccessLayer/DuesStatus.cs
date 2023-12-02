@@ -13,6 +13,7 @@ namespace DataAccessLayer
         public string e_posta { get; set; }
         public DateTime tarih { get; set; }
         public int ucret { get; set; }
+        public string uyelik_durumu { get; set; }
         public string durum { get; set; }
     }
 }
