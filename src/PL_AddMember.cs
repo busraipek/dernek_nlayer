@@ -112,6 +112,7 @@ namespace PresentationLayer
                         if (progressBar1.Value == 100)
                         {
                             MessageBox.Show("Üye kaydedildi.");
+                            progressBar1.Value = 0;
                         }
                     }
 
