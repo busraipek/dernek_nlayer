@@ -11,14 +11,28 @@ namespace BusinessLayer
 {
     public class BL_MemberList
     {
-        public void GetMember(string[,] membersArray)
+        public void GetMember(string[,] membersArray,int durum)
         {
             OleDbConnection connection = new OleDbConnection("Provider=Microsoft.ACE.Oledb.12.0;Data Source=C:\\Users\\90505\\Desktop\\Database4.accdb");
             {
+                string query;
                 try
                 {
                     connection.Open();
-                    string query = "SELECT u.ad, u.soyad, u.e_posta, a.tarih, a.ucret, ad.durum FROM aidat AS a INNER JOIN aidat_durum AS ad ON a.id = ad.aidat_id INNER JOIN uye AS u ON ad.kimlik_no = u.kimlik_no";
+                    if (durum == 0)
+                    {
+                    query = "SELECT u.ad, u.soyad, u.e_posta, u.uyelik_durumu, a.tarih, a.ucret, ad.durum " +
+               "FROM aidat a, aidat_durum ad, uye u " +
+               "WHERE a.id=ad.aidat_id AND ad.kimlik_no=u.kimlik_no";
+                    }
+                    else
+                    {
+                    query = "SELECT u.ad, u.soyad, u.e_posta, u.uyelik_durumu, a.tarih, a.ucret, ad.durum " +
+                                   "FROM aidat a, aidat_durum ad, uye u " +
+                                   "WHERE a.id=ad.aidat_id AND ad.kimlik_no=u.kimlik_no AND ad.durum = 'Ödenmedi'";
+                    }
+
+
                     using (OleDbCommand komut = new OleDbCommand(query, connection))
                     {
                         using (OleDbDataReader reader = komut.ExecuteReader())
@@ -30,17 +44,19 @@ namespace BusinessLayer
                                 {
                                     ad = reader["ad"].ToString(),
                                     soyad = reader["soyad"].ToString(),
+                                    ucret = (int)reader["ucret"],
                                     e_posta = reader["e_posta"].ToString(),
                                     tarih = (DateTime)reader["tarih"],
-                                    ucret = (int)reader["ucret"],
+                                    uyelik_durumu = reader["uyelik_durumu"].ToString(),
                                     durum = reader["durum"].ToString(),
                                 };
                                 membersArray[i, 0] = member.ad;
                                 membersArray[i, 1] = member.soyad;
-                                membersArray[i, 2] = member.tarih.ToString("dd/MM/yyyy"); // DateTime'i string'e dönüştür
-                                membersArray[i, 3] = member.durum;
-                                membersArray[i, 4] = member.ucret.ToString() ;
-                                membersArray[i, 5] = member.e_posta;
+                                membersArray[i, 2] = member.ucret.ToString() ;
+                                membersArray[i, 3] = member.tarih.ToString("dd/MM/yyyy"); // DateTime'i string'e dönüştür
+                                membersArray[i, 4] = member.durum;
+                                membersArray[i, 5] = member.uyelik_durumu;
+                                membersArray[i, 6] = member.e_posta;
                                 i = i + 1;
                             }
                             reader.Close();

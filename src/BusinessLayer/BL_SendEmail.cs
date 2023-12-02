@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer;
 using System.Data.OleDb;
-
+using System.Windows.Documents;
 
 namespace BusinessLayer
 {
@@ -18,29 +18,29 @@ namespace BusinessLayer
             {
                 sender = new DataAccessLayer.Sender();
             }
-            public void SendMail(string baslik, string konu)
+            public void SendMail(List<string> list, string baslik, string konu)
             {
-            //OleDbConnection connection = new OleDbConnection("Provider=Microsoft.ACE.Oledb.12.0;Data Source=C:\\Users\\90505\\Desktop\\Database4.accdb");
-            //{
-            //    connection.Open();
+            OleDbConnection connection = new OleDbConnection("Provider=Microsoft.ACE.Oledb.12.0;Data Source=C:\\Users\\90505\\Desktop\\Database4.accdb");
+            {
+                connection.Open();
 
-            //    string query = "SELECT sehir FROM sehir";
-            //    using (OleDbCommand command = new OleDbCommand(query, connection))
-            //    {
-            //        using (OleDbDataReader reader = command.ExecuteReader())
-            //        {
-            //            while (reader.Read())
-            //            {
-            //                City city = new City()
-            //                {
-            //                    sehir = reader["sehir"].ToString(),
-            //                };
+                string query = "SELECT u.e_posta FROM aidat a, aidat_durum ad, uye u where a.id=ad.aidat_id and ad.kimlik_no=u.kimlik_no and ad.durum = 'Ödenmedi' ";
+                using (OleDbCommand command = new OleDbCommand(query, connection))
+                {
+                    using (OleDbDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            DuesStatus posta = new DuesStatus()
+                            {
+                                e_posta = reader["e_posta"].ToString(),
+                            };
 
-            //                cities.Add(city.sehir.ToString());
-            //            }
-            //        }
-            //    }
-            //}
+                            list.Add(posta.e_posta.ToString());
+                        }
+                    }
+                }
+            }
 
             SmtpClient smtp = new SmtpClient();
                 smtp.Credentials = new NetworkCredential(sender.senderEmail, sender.senderpassword);
@@ -49,8 +49,12 @@ namespace BusinessLayer
                 smtp.EnableSsl = true;
                 sender.baslik = baslik;
                 sender.konu = konu;
-                MailMessage message = new MailMessage(sender.senderEmail, "aysegulkubraipek@gmail.com", baslik, konu);
+            foreach(var posta in list)
+            {
+                MailMessage message = new MailMessage(sender.senderEmail, posta, baslik, konu);
                 smtp.Send(message);
+            }
+
             }
         }
     }
