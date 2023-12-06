@@ -17,6 +17,7 @@ namespace PresentationLayer
         BusinessLayer.BL_MemberList pl_memberlist;
         BusinessLayer.BL_FilterMember pl_filtermember;
 
+
         public PL_HomePage()
         {
             InitializeComponent();
@@ -29,7 +30,6 @@ namespace PresentationLayer
         {
             try
             {
-                pl_sendemail.SendMail(textBox1.Text, textBox2.Text);
                 MessageBox.Show("Mail gönderildi.");
             }
             catch
@@ -160,11 +160,9 @@ namespace PresentationLayer
         {
             try
             {
-            toolStripComboBox1.Text = toolStripComboBox1.Items[0].ToString();
             toolStripTextBox1.Clear();
             toolStripTextBox2.Clear();
             toolStripTextBox4.Clear();
-            toolStripComboBox2.Text = toolStripComboBox2.Items[0].ToString();
             }
             catch
             {
@@ -184,17 +182,22 @@ namespace PresentationLayer
                 pl_filtermember.FilterMember(membersArray, filt, text);
                 for (int i = 0; i < membersArray.GetLength(0); i++)
                 {
-                    dataGridView1.Rows.Add(
-                        membersArray[i, 0],
-                        membersArray[i, 1],
-                        membersArray[i, 2],
-                        membersArray[i, 3],
-                        membersArray[i, 4],
-                        membersArray[i, 5],
-                        membersArray[i, 6],
-                        membersArray[i, 7],
-                        membersArray[i, 8]
+                    if (membersArray[i,0]!=null)
+                    {
+                        dataGridView1.Rows.Add(
+                            membersArray[i, 0],
+                            membersArray[i, 1],
+                            membersArray[i, 2],
+                            membersArray[i, 3],
+                            membersArray[i, 4],
+                            membersArray[i, 5],
+                            membersArray[i, 6],
+                            membersArray[i, 7],
+                            membersArray[i, 8]
                     );
+                    }
+                    else
+                        break;
                 }
             }
             catch
