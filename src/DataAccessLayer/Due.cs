@@ -10,6 +10,7 @@ namespace DataAccessLayer
     {
         public int aidat_id { get; set; }
         public DateTime tarih { get; set; }
+        public DateTime son_odeme { get; set; }
         public int ucret { get; set; }
 
     }

@@ -15,5 +15,7 @@ namespace DataAccessLayer
         public int ucret { get; set; }
         public string uyelik_durumu { get; set; }
         public string durum { get; set; }
+        public string aidat_id { get; set; }
+        public string kimlik_no { get; set; }
     }
 }
