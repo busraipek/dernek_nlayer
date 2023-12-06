@@ -17,7 +17,7 @@ namespace BusinessLayer
             {
                 connection.Open();
 
-                string query = "SELECT tarih, ucret FROM aidat";
+                string query = "SELECT id, tarih, ucret, son_odeme FROM aidat";
                 using (OleDbCommand command = new OleDbCommand(query, connection))
                 {
                     using (OleDbDataReader reader = command.ExecuteReader())
@@ -27,12 +27,15 @@ namespace BusinessLayer
                         {
                             Due due = new Due()
                             {
+                                aidat_id = (int)reader["id"],
                                 ucret = (int)reader["ucret"],
                                 tarih = (DateTime)reader["tarih"],
-
-                        }; 
+                                son_odeme = (DateTime)reader["son_odeme"]
+                            }; 
+                            dues[i, 3] = due.aidat_id.ToString();
                             dues[i, 0] = due.ucret.ToString();
                             dues[i, 1] = due.tarih.ToString("dd/MM/yyyy");
+                            dues[i, 2] = due.son_odeme.ToString("dd/MM/yyyy");
                             i = i + 1;
                         }
                     }

@@ -24,7 +24,7 @@ namespace BusinessLayer
             {
                 connection.Open();
 
-                string query = "SELECT u.e_posta FROM aidat a, aidat_durum ad, uye u where a.id=ad.aidat_id and ad.kimlik_no=u.kimlik_no and ad.durum = 'Ödenmedi' ";
+                string query = "SELECT u.e_posta FROM aidat a, aidat_durum ad, uye u where a.id=ad.aidat_id and ad.kimlik_no=u.kimlik_no and ad.durum = 'Ödenmedi' and u.uyelik_durumu= 'Aktif' ";
                 using (OleDbCommand command = new OleDbCommand(query, connection))
                 {
                     using (OleDbDataReader reader = command.ExecuteReader())

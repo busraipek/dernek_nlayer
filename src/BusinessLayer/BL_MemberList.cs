@@ -21,13 +21,13 @@ namespace BusinessLayer
                     connection.Open();
                     if (durum == 0)
                     {
-                    query = "SELECT u.ad, u.soyad, u.e_posta, u.uyelik_durumu, a.tarih, a.ucret, ad.durum " +
+                    query = "SELECT u.ad, u.soyad, u.e_posta, u.uyelik_durumu, a.tarih, a.ucret, ad.durum, ad.aidat_id, u.kimlik_no " +
                "FROM aidat a, aidat_durum ad, uye u " +
                "WHERE a.id=ad.aidat_id AND ad.kimlik_no=u.kimlik_no";
                     }
                     else
                     {
-                    query = "SELECT u.ad, u.soyad, u.e_posta, u.uyelik_durumu, a.tarih, a.ucret, ad.durum " +
+                    query = "SELECT u.ad, u.soyad, u.e_posta, u.uyelik_durumu, a.tarih, a.ucret, ad.durum, ad.aidat_id, u.kimlik_no" +
                                    "FROM aidat a, aidat_durum ad, uye u " +
                                    "WHERE a.id=ad.aidat_id AND ad.kimlik_no=u.kimlik_no AND ad.durum = 'Ödenmedi'";
                     }
@@ -49,6 +49,8 @@ namespace BusinessLayer
                                     tarih = (DateTime)reader["tarih"],
                                     uyelik_durumu = reader["uyelik_durumu"].ToString(),
                                     durum = reader["durum"].ToString(),
+                                    aidat_id = reader["aidat_id"].ToString(),
+                                    kimlik_no = reader["kimlik_no"].ToString(),
                                 };
                                 membersArray[i, 0] = member.ad;
                                 membersArray[i, 1] = member.soyad;
@@ -57,6 +59,8 @@ namespace BusinessLayer
                                 membersArray[i, 4] = member.durum;
                                 membersArray[i, 5] = member.uyelik_durumu;
                                 membersArray[i, 6] = member.e_posta;
+                                membersArray[i, 7] = member.aidat_id;
+                                membersArray[i, 8] = member.kimlik_no;
                                 i = i + 1;
                             }
                             reader.Close();

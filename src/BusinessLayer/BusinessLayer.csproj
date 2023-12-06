@@ -42,12 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BL_AddDuetoMember.cs" />
     <Compile Include="BL_AddMember.cs" />
     <Compile Include="BL_CityList.cs" />
     <Compile Include="BL_DueList.cs" />
     <Compile Include="BL_FilterMember.cs" />
     <Compile Include="BL_MemberList.cs" />
     <Compile Include="BL_SendEmail.cs" />
+    <Compile Include="BL_UpdateDue.cs" />
     <Compile Include="BL_UpdateMember.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
