@@ -55,28 +55,7 @@ namespace PresentationLayer
         {
             try
             {
-                string[,] membersArray = new string[100, 9];
-                pl_memberlist.GetMember(membersArray, 0);
-                for (int i = 0; i < membersArray.GetLength(0); i++)
-                {
-                    if (membersArray[i, 0] != null)
-                    {
-                        dataGridView1.Rows.Add(
-                            membersArray[i, 0],
-                            membersArray[i, 1],
-                            membersArray[i, 2] + " TL",
-                            membersArray[i, 3],
-                            membersArray[i, 4],
-                            membersArray[i, 5],
-                            membersArray[i, 6],
-                            membersArray[i, 7],
-                            membersArray[i, 8]
-                        );
-                    }
-                    else
-                        break;
-
-                }
+                FillTable(0);              
             }
             catch
             {
@@ -90,29 +69,7 @@ namespace PresentationLayer
             {
                 try
                 {
-
-                    dataGridView1.Rows.Clear();
-                    string[,] membersArray = new string[100, 9];
-                    pl_memberlist.GetMember(membersArray, 1);
-                    for (int i = 0; i < membersArray.GetLength(0); i++)
-                    {
-                        if (membersArray[i, 0] != null)
-                        {
-                            dataGridView1.Rows.Add(
-                            membersArray[i, 0],
-                            membersArray[i, 1],
-                            membersArray[i, 2] + " TL",
-                            membersArray[i, 3],
-                            membersArray[i, 4],
-                            membersArray[i, 5],
-                            membersArray[i, 6],
-                            membersArray[i, 7],
-                            membersArray[i, 8]
-                        );
-                        }
-                        else
-                            break;
-                    }
+                    FillTable(1);
                 }
                 catch
                 {
@@ -121,32 +78,9 @@ namespace PresentationLayer
             }
             else if (checkBox2.Checked == false)
             {
-                try
+                try 
                 {
-                    dataGridView1.Rows.Clear();
-
-                    string[,] membersArray = new string[100, 9];
-                    pl_memberlist.GetMember(membersArray, 0);
-
-                    for (int i = 0; i < membersArray.GetLength(0); i++)
-                    {
-                        if (membersArray[i, 0] != null)
-                        {
-                            dataGridView1.Rows.Add(
-                            membersArray[i, 0],
-                            membersArray[i, 1],
-                            membersArray[i, 2] + " TL",
-                            membersArray[i, 3],
-                            membersArray[i, 4],
-                            membersArray[i, 5],
-                            membersArray[i, 6],
-                            membersArray[i, 7],
-                            membersArray[i, 8]
-                        );
-                    }
-                    else
-                        break;
-                }
+                    FillTable(0);             
                 }
                 catch
                 {
@@ -173,28 +107,8 @@ namespace PresentationLayer
                 string id = dataGridView1.SelectedRows[0].Cells[7].Value.ToString();
                 string kimlik = dataGridView1.SelectedRows[0].Cells[8].Value.ToString();
                 string[,] membersArray = new string[100, 9];
-                pl_updatemember.UpdateMember(membersArray, id, kimlik, comboBox2.Text, comboBox1.Text);
-                for (int i = 0; i < membersArray.GetLength(0); i++)
-                {
-                    if (membersArray[i, 4] != null)
-                    {
-                        dataGridView1.Rows.Clear();
-                        dataGridView1.Rows.Add(
-                        membersArray[i, 0],
-                        membersArray[i, 1],
-                        membersArray[i, 2] + " TL",
-                        membersArray[i, 3],
-                        membersArray[i, 4],
-                        membersArray[i, 5],
-                        membersArray[i, 6],
-                        membersArray[i, 7],
-                        membersArray[i, 8]
-                    );
-                    }
-                    else
-                        break;
-                    MessageBox.Show("güncellendi");
-                }
+                pl_updatemember.UpdateMember(id, kimlik, comboBox2.Text, comboBox1.Text);
+                FillTable(0);
             }
             catch
             {
@@ -202,6 +116,41 @@ namespace PresentationLayer
             }
 
         }
-    }
-    }
+        public void FillTable(int x)
+        {
+            try
+            {
+                string[,] membersArray = new string[100, 9];
+                pl_memberlist.GetMember(membersArray, x);
+                dataGridView1.Rows.Clear();
+                for (int i = 0; i < membersArray.GetLength(0); i++)
+                {
+                    if (membersArray[i, 0] != null)
+                    {
 
+                        dataGridView1.Rows.Add(
+                            membersArray[i, 0],
+                            membersArray[i, 1],
+                            membersArray[i, 2] + " TL",
+                            membersArray[i, 3],
+                            membersArray[i, 4],
+                            membersArray[i, 5],
+                            membersArray[i, 6],
+                            membersArray[i, 7],
+                            membersArray[i, 8]
+                        );
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Güncellenemedi");
+            }
+            
+        }
+    }
+}
