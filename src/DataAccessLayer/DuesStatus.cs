@@ -17,5 +17,6 @@ namespace DataAccessLayer
         public string durum { get; set; }
         public string aidat_id { get; set; }
         public string kimlik_no { get; set; }
+        public DateTime odeme_tarihi { get; set; }
     }
 }
