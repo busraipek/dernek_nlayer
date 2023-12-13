@@ -21,13 +21,13 @@ namespace BusinessLayer
                     connection.Open();
                     if (durum == 0)
                     {
-                    query = "SELECT u.ad, u.soyad, u.e_posta, u.uyelik_durumu, a.tarih, a.ucret, ad.durum, ad.aidat_id, u.kimlik_no " +
+                    query = "SELECT u.ad, u.soyad, u.e_posta, u.uyelik_durumu, a.tarih, a.ucret, ad.durum, ad.aidat_id, u.kimlik_no, ad.odeme_tarihi " +
                "FROM aidat a, aidat_durum ad, uye u " +
                "WHERE a.id=ad.aidat_id AND ad.kimlik_no=u.kimlik_no";
                     }
                     else
                     {
-                    query = "SELECT u.ad, u.soyad, u.e_posta, u.uyelik_durumu, a.tarih, a.ucret, ad.durum, ad.aidat_id, u.kimlik_no " +
+                    query = "SELECT u.ad, u.soyad, u.e_posta, u.uyelik_durumu, a.tarih, a.ucret, ad.durum, ad.aidat_id, u.kimlik_no, ad.odeme_tarihi " +
                                    "FROM aidat a, aidat_durum ad, uye u " +
                                    "WHERE a.id=ad.aidat_id AND ad.kimlik_no=u.kimlik_no AND ad.durum = 'Ödenmedi'";
                     }
@@ -51,16 +51,18 @@ namespace BusinessLayer
                                     durum = reader["durum"].ToString(),
                                     aidat_id = reader["aidat_id"].ToString(),
                                     kimlik_no = reader["kimlik_no"].ToString(),
+                                    odeme_tarihi = (DateTime)reader["odeme_tarihi"],
                                 };
                                 membersArray[i, 0] = member.ad;
                                 membersArray[i, 1] = member.soyad;
                                 membersArray[i, 2] = member.ucret.ToString() ;
                                 membersArray[i, 3] = member.tarih.ToString("dd/MM/yyyy"); // DateTime'i string'e dönüştür
                                 membersArray[i, 4] = member.durum;
-                                membersArray[i, 5] = member.uyelik_durumu;
-                                membersArray[i, 6] = member.e_posta;
-                                membersArray[i, 7] = member.aidat_id;
-                                membersArray[i, 8] = member.kimlik_no;
+                                membersArray[i, 5] = member.odeme_tarihi.ToString("dd/MM/yyyy");
+                                membersArray[i, 6] = member.uyelik_durumu;
+                                membersArray[i, 7] = member.e_posta;
+                                membersArray[i, 8] = member.aidat_id;
+                                membersArray[i, 9] = member.kimlik_no;
                                 i = i + 1;
                             }
                             reader.Close();
