@@ -65,28 +65,22 @@ namespace PresentationLayer
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox2.Checked == true)
-            {
-                try
-                {
-                    FillTable(1);
-                }
-                catch
-                {
-                    MessageBox.Show("kişi listesi olmadı");
-                }
-            }
-            else if (checkBox2.Checked == false)
-            {
-                try 
-                {
-                    FillTable(0);             
-                }
-                catch
+            try
+            {      
+                 if (checkBox2.Checked == true)
+                 {
+                   FillTable(1);
+                 }
+                 else if (checkBox2.Checked == false)
+                 {
+                   FillTable(0);                         
+
+                 } 
+            }               
+            catch
                 {
                     MessageBox.Show("kişi listesi olmadı");
                 }
-            }
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -95,7 +89,7 @@ namespace PresentationLayer
             {
                 label3.Text = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
                 comboBox1.Text = dataGridView1.SelectedRows[0].Cells[4].Value.ToString();
-                comboBox2.Text = dataGridView1.SelectedRows[0].Cells[5].Value.ToString();
+                comboBox2.Text = dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
             }
         }
 
@@ -104,9 +98,9 @@ namespace PresentationLayer
             //GÜNCELLE BUTONU
             try
             {
-                string id = dataGridView1.SelectedRows[0].Cells[7].Value.ToString();
-                string kimlik = dataGridView1.SelectedRows[0].Cells[8].Value.ToString();
-                string[,] membersArray = new string[100, 9];
+                string id = dataGridView1.SelectedRows[0].Cells[8].Value.ToString();
+                string kimlik = dataGridView1.SelectedRows[0].Cells[9].Value.ToString();
+                string[,] membersArray = new string[100, 10];
                 pl_updatemember.UpdateMember(id, kimlik, comboBox2.Text, comboBox1.Text);
                 FillTable(0);
             }
@@ -120,7 +114,7 @@ namespace PresentationLayer
         {
             try
             {
-                string[,] membersArray = new string[100, 9];
+                string[,] membersArray = new string[100, 10];
                 pl_memberlist.GetMember(membersArray, x);
                 dataGridView1.Rows.Clear();
                 for (int i = 0; i < membersArray.GetLength(0); i++)
@@ -137,7 +131,8 @@ namespace PresentationLayer
                             membersArray[i, 5],
                             membersArray[i, 6],
                             membersArray[i, 7],
-                            membersArray[i, 8]
+                            membersArray[i, 8],
+                            membersArray[i, 9]
                         );
                     }
                     else
@@ -151,6 +146,11 @@ namespace PresentationLayer
                 MessageBox.Show("Güncellenemedi");
             }
             
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

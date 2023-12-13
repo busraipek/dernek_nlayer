@@ -51,6 +51,7 @@ namespace PresentationLayer
             this.Ücret = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tarih = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Durum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.odeme_tarihi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Üyelik = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Eposta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ids = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -71,6 +72,7 @@ namespace PresentationLayer
             this.Ücret,
             this.Tarih,
             this.Durum,
+            this.odeme_tarihi,
             this.Üyelik,
             this.Eposta,
             this.ids,
@@ -187,6 +189,7 @@ namespace PresentationLayer
             this.groupBox2.Size = new System.Drawing.Size(353, 308);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
+            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // button3
             // 
@@ -298,6 +301,12 @@ namespace PresentationLayer
             this.Durum.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Durum.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // odeme_tarihi
+            // 
+            this.odeme_tarihi.HeaderText = "Ödeme Tarihi";
+            this.odeme_tarihi.MinimumWidth = 6;
+            this.odeme_tarihi.Name = "odeme_tarihi";
+            // 
             // Üyelik
             // 
             this.Üyelik.HeaderText = "Üyelik";
@@ -375,6 +384,7 @@ namespace PresentationLayer
         private System.Windows.Forms.DataGridViewTextBoxColumn Ücret;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tarih;
         private System.Windows.Forms.DataGridViewTextBoxColumn Durum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn odeme_tarihi;
         private System.Windows.Forms.DataGridViewTextBoxColumn Üyelik;
         private System.Windows.Forms.DataGridViewTextBoxColumn Eposta;
         private System.Windows.Forms.DataGridViewTextBoxColumn ids;

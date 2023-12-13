@@ -87,9 +87,18 @@ namespace PresentationLayer
             try
             {
                 string[,] membersArray = new string[100, 4];
+                if (label3.Text == "label3")
+                {
+                MessageBox.Show("Önce bir aidat seçiniz.");
+                }
+                else
+                {
                 pl_updatedue.UpdateDue(membersArray,label3.Text, dateTimePicker1.Text, textBox1.Text);
-                MessageBox.Show("güncellendi");
-                FillTable();
+                    MessageBox.Show("Güncellendi");
+
+                    FillTable();
+                }
+
             }
             catch
             {
